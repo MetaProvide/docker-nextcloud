@@ -1,5 +1,27 @@
 {
   "extends": [
-    "config:base"
+    ":separateMajorReleases",
+    ":separatePatchReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    "docker:pinDigests",
+    "docker:disableMajor"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/|\\.)Dockerfile(\\.[\\w\\d]*)*$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION (?<currentValue>.*)\\s"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "updateTypes": ["patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr"
+    }
   ]
 }
