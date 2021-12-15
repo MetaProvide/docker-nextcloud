@@ -4,6 +4,13 @@
     ":separatePatchReleases",
     ":ignoreUnstable",
     ":prImmediately",
+    ":autodetectPinVersions",
+    ":updateNotScheduled",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":disableRateLimiting",
+    "group:monorepos",
+    "group:recommended",
     "docker:pinDigests",
     "docker:disableMajor"
   ],
