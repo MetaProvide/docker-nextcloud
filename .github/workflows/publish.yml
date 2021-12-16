@@ -1,11 +1,9 @@
 name: Build and publish
 
-# on:
-#   push:
-#     branches:
-#       - "main"
-
-on: pull_request
+on:
+  push:
+    branches:
+      - "main"
 
 env:
   IMAGE_NAME: metaprovide/nextcloud
