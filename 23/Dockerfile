@@ -9,7 +9,7 @@ RUN set -ex; \
     go mod vendor; \
     go install;
 
-FROM nextcloud:23.0.9-fpm@sha256:431b426a6d3d3d115c4a9003cc88da8310f6efcc51f859836db4e463da630512
+FROM nextcloud:23.0.10-fpm@sha256:b5c30e0a86baf4442bb0a1d2c566d0c6314c2aed9fc60d584c935caede417b3c
 
 COPY --from=supercronic /go/bin/supercronic /usr/local/bin/supercronic
 
