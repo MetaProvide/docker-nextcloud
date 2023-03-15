@@ -6,7 +6,7 @@ on:
       - "main"
 
 env:
-  IMAGE_NAME: metaprovide/nextcloud
+  IMAGE_NAME: metabotter/nextcloud
 
 jobs:
   lint_dockerfile:
