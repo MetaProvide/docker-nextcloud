@@ -116,3 +116,35 @@ jobs:
           push: true
           file: ${{ env.VERSION }}/Dockerfile
           tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
+
+  nextcloud_27:
+    runs-on: ubuntu-latest
+    needs:
+      - lint_dockerfile
+    env:
+      VERSION: "27"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get version number
+        run: |
+          VER=$(grep "FROM nextcloud:" ${{ env.VERSION }}/Dockerfile)
+          VER=${VER#*:}
+          VER=${VER%@*}
+          VER=${VER%-*}
+          echo "IMAGE_VERSION=$VER" >> $GITHUB_ENV
+
+      - name: Build and publish
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: ${{ env.VERSION }}/Dockerfile
+          tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
