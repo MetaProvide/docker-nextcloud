@@ -15,7 +15,7 @@ FROM nextcloud:27.1.5-fpm@sha256:7d751eab904be389ab85ee3516c6e8bbfb9f05187ba5e00
 
 COPY --from=supercronic /go/bin/supercronic /usr/local/bin/supercronic
 
-ENV PHP_MEMORY_LIMIT 2048M
+ENV PHP_MEMORY_LIMIT 4048M
 ENV PHP_UPLOAD_LIMIT 16G
 ENV PHP_EXECUTION_TIME 3600
 
