@@ -110,3 +110,19 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
+
+  nextcloud_30:
+    runs-on: ubuntu-latest
+    needs:
+      - lint_dockerfile
+    env:
+      VERSION: "30"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test build
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          file: "${{ env.VERSION }}/Dockerfile"
