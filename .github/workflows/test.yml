@@ -27,7 +27,7 @@ jobs:
 
       - name: Test build
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
 
@@ -43,7 +43,7 @@ jobs:
 
       - name: Test build
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
 
@@ -59,7 +59,7 @@ jobs:
 
       - name: Test build
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
 
@@ -75,7 +75,7 @@ jobs:
 
       - name: Test build
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
 
@@ -91,6 +91,6 @@ jobs:
 
       - name: Test build
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           file: "${{ env.VERSION }}/Dockerfile"
