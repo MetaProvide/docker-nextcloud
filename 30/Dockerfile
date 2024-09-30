@@ -43,8 +43,31 @@ RUN set -ex; \
 
 ENV NEXTCLOUD_UPDATE=1
 
-COPY ./swarm-plugin.sh /usr/local/bin/swarm-plugin.sh
+COPY supervisord.conf /
 
-RUN chmod +x /usr/local/bin/swarm-plugin.sh
-
-ENTRYPOINT ["/usr/local/bin/swarm-plugin.sh"]
+# Define the command to run at container start using an inline shell script
+ENTRYPOINT ["/bin/bash", "-c", " \
+    set -e; \
+    echo 'Waiting for Nextcloud to be ready...'; \
+    until gosu www-data php occ status >/dev/null 2>&1; do \
+        echo 'Nextcloud is not ready yet, retrying in 10 seconds...'; \
+        sleep 10; \
+    done; \
+    echo 'Nextcloud is ready.'; \
+    if ! gosu www-data php occ app:list | grep -q 'files_external: enabled'; then \
+        echo 'Enabling files_external app...'; \
+        gosu www-data php occ app:enable files_external; \
+    else \
+        echo 'files_external app is already enabled.'; \
+    fi; \
+    if ! gosu www-data php occ app:list | grep -q 'files_external_ethswarm'; then \
+        echo 'Installing and enabling files_external_ethswarm app...'; \
+        gosu www-data php occ app:install files_external_ethswarm; \
+        gosu www-data php occ app:enable files_external_ethswarm; \
+    else \
+        echo 'files_external_ethswarm app is already installed and enabled.'; \
+    fi; \
+    echo 'All apps are enabled and installed successfully.'; \
+    echo 'Starting supervisord...'; \
+    exec /usr/bin/supervisord -c /supervisord.conf" \
+]
