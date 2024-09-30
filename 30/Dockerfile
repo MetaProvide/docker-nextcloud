@@ -24,6 +24,7 @@ RUN set -ex; \
     apt-get install -y --no-install-recommends \
         supervisor \
         ffmpeg \
+        gosu \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     \
@@ -44,8 +45,9 @@ COPY supervisord.conf /
 
 ENV NEXTCLOUD_UPDATE=1
 
-RUN sudo -u www-data php occ app:enable files_external
-RUN sudo -u www-data php occ app:install files_external_ethswarm
-RUN sudo -u www-data php occ app:enable files_external_ethswarm
+WORKDIR /var/www/html
+RUN gosu www-data php occ app:enable files_external
+RUN gosu www-data php occ app:install files_external_ethswarm
+RUN gosu www-data php occ app:enable files_external_ethswarm
 
 CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
