@@ -41,13 +41,33 @@ RUN set -ex; \
         echo "max_input_time=${PHP_EXECUTION_TIME}"; \
     } > /usr/local/etc/php/conf.d/nextcloud.ini;
 
-COPY supervisord.conf /
-
 ENV NEXTCLOUD_UPDATE=1
 
-WORKDIR /var/www/html
-RUN gosu www-data php occ app:enable files_external
-RUN gosu www-data php occ app:install files_external_ethswarm
-RUN gosu www-data php occ app:enable files_external_ethswarm
+COPY supervisord.conf /
 
-CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
+# Define the command to run at container start using an inline shell script
+ENTRYPOINT ["/bin/bash", "-c", " \
+    set -e; \
+    echo 'Waiting for Nextcloud to be ready...'; \
+    until gosu www-data php occ status >/dev/null 2>&1; do \
+        echo 'Nextcloud is not ready yet, retrying in 10 seconds...'; \
+        sleep 10; \
+    done; \
+    echo 'Nextcloud is ready.'; \
+    if ! gosu www-data php occ app:list | grep -q 'files_external: enabled'; then \
+        echo 'Enabling files_external app...'; \
+        gosu www-data php occ app:enable files_external; \
+    else \
+        echo 'files_external app is already enabled.'; \
+    fi; \
+    if ! gosu www-data php occ app:list | grep -q 'files_external_ethswarm'; then \
+        echo 'Installing and enabling files_external_ethswarm app...'; \
+        gosu www-data php occ app:install files_external_ethswarm; \
+        gosu www-data php occ app:enable files_external_ethswarm; \
+    else \
+        echo 'files_external_ethswarm app is already installed and enabled.'; \
+    fi; \
+    echo 'All apps are enabled and installed successfully.'; \
+    echo 'Starting supervisord...'; \
+    exec /usr/bin/supervisord -c /supervisord.conf" \
+]
