@@ -47,7 +47,9 @@ COPY supervisord.conf /
 
 # Define the command to run at container start using an inline shell script
 ENTRYPOINT ["/bin/bash", "-c", " \
-    set -e; \
+    set -e; \   
+    echo 'Starting supervisord...'; \
+    exec /usr/bin/supervisord -c /supervisord.conf; \
     echo 'Waiting for Nextcloud to be ready...'; \
     until gosu www-data php occ status >/dev/null 2>&1; do \
         echo 'Nextcloud is not ready yet, retrying in 10 seconds...'; \
@@ -68,6 +70,4 @@ ENTRYPOINT ["/bin/bash", "-c", " \
         echo 'files_external_ethswarm app is already installed and enabled.'; \
     fi; \
     echo 'All apps are enabled and installed successfully.'; \
-    echo 'Starting supervisord...'; \
-    exec /usr/bin/supervisord -c /supervisord.conf" \
-]
+"]
