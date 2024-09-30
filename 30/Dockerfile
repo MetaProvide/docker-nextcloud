@@ -41,11 +41,9 @@ RUN set -ex; \
         echo "max_input_time=${PHP_EXECUTION_TIME}"; \
     } > /usr/local/etc/php/conf.d/nextcloud.ini;
 
-COPY supervisord.conf /
-
 ENV NEXTCLOUD_UPDATE=1
 
-COPY ../scripts/swarm-plugin.sh /usr/local/bin/swarm-plugin.sh
+COPY ./swarm-plugin.sh /usr/local/bin/swarm-plugin.sh
 
 RUN chmod +x /usr/local/bin/swarm-plugin.sh
 
