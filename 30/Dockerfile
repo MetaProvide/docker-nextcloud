@@ -45,9 +45,8 @@ COPY supervisord.conf /
 
 ENV NEXTCLOUD_UPDATE=1
 
-WORKDIR /var/www/html
-RUN gosu www-data php occ app:enable files_external \
-    && gosu www-data php occ app:install files_external_ethswarm \
-    && gosu www-data php occ app:enable files_external_ethswarm
+COPY ../scripts/swarm-plugin.sh /usr/local/bin/swarm-plugin.sh
 
-CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
+RUN chmod +x /usr/local/bin/swarm-plugin.sh
+
+ENTRYPOINT ["/usr/local/bin/swarm-plugin.sh"]
