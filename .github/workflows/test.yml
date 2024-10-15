@@ -65,7 +65,7 @@ jobs:
 
       - name: Send message to Nextcloud talk
         run: |
-          curl -X POST ${{ secrets.NEXTCLOUD_TALK_ALERTS_URL }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been tested'
+          curl -X POST ${{ secrets.NEXTCLOUD_TALK_URL }}/${{ secrets.NEXTCLOUD_CHAT_ID }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been tested'
  
 
   nextcloud_30:
