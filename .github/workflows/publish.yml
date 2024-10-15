@@ -52,6 +52,10 @@ jobs:
           push: true
           file: ${{ env.VERSION }}/Dockerfile
           tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
+      
+      - name: Send message to Nextcloud talk
+        run: |
+          curl -X POST ${{ secrets.NEXTCLOUD_TALK_URL }}/${{ secrets.NEXTCLOUD_CHAT_ID }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been updated'
   
   nextcloud_28:
     runs-on: ubuntu-latest
@@ -84,7 +88,11 @@ jobs:
           push: true
           file: ${{ env.VERSION }}/Dockerfile
           tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
- 
+      
+      - name: Send message to Nextcloud talk
+        run: |
+          curl -X POST ${{ secrets.NEXTCLOUD_TALK_URL }}/${{ secrets.NEXTCLOUD_CHAT_ID }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been updated'
+
   nextcloud_29:
     runs-on: ubuntu-latest
     needs:
@@ -116,6 +124,10 @@ jobs:
           push: true
           file: ${{ env.VERSION }}/Dockerfile
           tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
+      
+      - name: Send message to Nextcloud talk
+        run: |
+          curl -X POST ${{ secrets.NEXTCLOUD_TALK_URL }}/${{ secrets.NEXTCLOUD_CHAT_ID }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been updated'
  
   nextcloud_30:
     runs-on: ubuntu-latest
@@ -148,3 +160,7 @@ jobs:
           push: true
           file: ${{ env.VERSION }}/Dockerfile
           tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}"
+      
+      - name: Send message to Nextcloud talk
+        run: |
+          curl -X POST ${{ secrets.NEXTCLOUD_TALK_URL }}/${{ secrets.NEXTCLOUD_CHAT_ID }} --user '${{ secrets.NEXTCLOUD_USERNAME }}:${{ secrets.NEXTCLOUD_APP_PASSWORD }}' --header 'OCS-APIRequest: true' --data-urlencode 'message=Nextcloud ${{ env.VERSION }} image has been updated'
