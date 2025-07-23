@@ -10,7 +10,7 @@ RUN set -ex; \
     go install;
 
 
-FROM nextcloud:30.0.13-fpm@sha256:5d88e9bff4c055b912e18989a8c0371486ffcacbb48aa4fb3a9a7fa6a0156c71
+FROM nextcloud:30.0.13-fpm@sha256:1fcb93d02dff1177f7c9b9c783511daa5c246a4b29a3049bd96e9b488c6fa676
 
 COPY --from=supercronic /go/bin/supercronic /usr/local/bin/supercronic
 
