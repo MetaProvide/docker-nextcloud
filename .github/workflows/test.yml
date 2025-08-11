@@ -8,7 +8,7 @@ jobs:
     container: hadolint/hadolint:latest-debian@sha256:cfb21dfaf9514e2260011558816d3971f5ab8eb5dbb0381b70461a290168817e
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: hadolint
         run: |
@@ -23,7 +23,7 @@ jobs:
       VERSION: "27"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Test build
         id: docker_build
@@ -39,7 +39,7 @@ jobs:
       VERSION: "28"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Test build
         id: docker_build
@@ -55,7 +55,7 @@ jobs:
       VERSION: "29"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Test build
         id: docker_build
@@ -71,7 +71,7 @@ jobs:
       VERSION: "30"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Test build
         id: docker_build
