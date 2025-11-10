@@ -14,7 +14,7 @@ jobs:
     container: hadolint/hadolint:latest-debian@sha256:158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: hadolint
         run: |
@@ -29,7 +29,7 @@ jobs:
       VERSION: "27"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -65,7 +65,7 @@ jobs:
       VERSION: "28"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -101,7 +101,7 @@ jobs:
       VERSION: "29"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -137,7 +137,7 @@ jobs:
       VERSION: "30"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
