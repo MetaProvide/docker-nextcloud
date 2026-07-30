@@ -11,7 +11,7 @@ env:
 jobs:
   lint_dockerfile:
     runs-on: ubuntu-latest
-    container: hadolint/hadolint:latest-debian@sha256:158cd0184dcaa18bd8ec20b61f4c1cabdf8b32a592d062f57bdcb8e4c1d312e2
+    container: hadolint/hadolint:latest-debian@sha256:cc00266a16707bbbdfd29517cccd76164ac46a956e2ba8222515df5691fa54b5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
